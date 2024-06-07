@@ -1,0 +1,21 @@
+@using TaskTechScheduler.Web.ViewModels.MainAdminViewModel
+@model IEnumerable<TaskTechScheduler.Web.ViewModels.MainAdminViewModel.ListOfTasks>
+
+<table>
+    <tr>
+        <th>Task ID</th>
+        <th>Task Title</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var task in Model)
+    {
+        <tr>
+            <td>@task.TaskId</td>
+            <td>@task.Title</td>
+            <td style="@(task.Status == ListOfTasks.StatusTask.Issued ? "color: red" 
+                        : task.Status == ListOfTasks.StatusTask.Doing ? "color: yellow" : "color: green")">
+                @task.Status.ToString()
+            </td>
+        </tr>
+    }
+</table>

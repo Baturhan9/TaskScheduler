@@ -8,6 +8,7 @@ builder.Configuration.Sources.Clear();
 builder.Configuration.AddJsonFile("appsettings.json");
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
