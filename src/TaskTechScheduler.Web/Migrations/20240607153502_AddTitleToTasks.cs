@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskTechScheduler.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class InitData : Migration
+    public partial class AddTitleToTasks : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,21 +36,21 @@ namespace TaskTechScheduler.Web.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
-                    IssuedUserAdminId = table.Column<int>(type: "INTEGER", nullable: false),
                     AcceptedUserAdminId = table.Column<int>(type: "INTEGER", nullable: false),
                     isCompleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                    CompletedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    UserAdminsId = table.Column<int>(type: "INTEGER", nullable: true)
+                    CompletedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tasks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tasks_Users_UserAdminsId",
-                        column: x => x.UserAdminsId,
+                        name: "FK_Tasks_Users_AcceptedUserAdminId",
+                        column: x => x.AcceptedUserAdminId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -65,9 +65,9 @@ namespace TaskTechScheduler.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_UserAdminsId",
+                name: "IX_Tasks_AcceptedUserAdminId",
                 table: "Tasks",
-                column: "UserAdminsId");
+                column: "AcceptedUserAdminId");
         }
 
         /// <inheritdoc />

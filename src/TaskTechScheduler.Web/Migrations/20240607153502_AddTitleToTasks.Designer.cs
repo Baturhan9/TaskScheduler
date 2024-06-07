@@ -11,8 +11,8 @@ using Models;
 namespace TaskTechScheduler.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240607133732_InitData")]
-    partial class InitData
+    [Migration("20240607153502_AddTitleToTasks")]
+    partial class AddTitleToTasks
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,18 +36,16 @@ namespace TaskTechScheduler.Web.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("IssuedUserAdminId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("UserAdminsId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("isCompleted")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserAdminsId");
+                    b.HasIndex("AcceptedUserAdminId");
 
                     b.ToTable("Tasks");
                 });
@@ -121,9 +119,13 @@ namespace TaskTechScheduler.Web.Migrations
 
             modelBuilder.Entity("Models.Tasks", b =>
                 {
-                    b.HasOne("Models.UserAdmins", null)
+                    b.HasOne("Models.UserAdmins", "TechAdmin")
                         .WithMany("Tasks")
-                        .HasForeignKey("UserAdminsId");
+                        .HasForeignKey("AcceptedUserAdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TechAdmin");
                 });
 
             modelBuilder.Entity("Models.UserAdmins", b =>

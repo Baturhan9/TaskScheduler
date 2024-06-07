@@ -3,17 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TaskTechScheduler.Web.Controllers;
 
-public class TechAdminController : Controller
+public class AuthController : Controller
 {
     private readonly IRepositoryManager _repositories;
 
-    public TechAdminController(IRepositoryManager repositories)
+    public AuthController(IRepositoryManager repositories)
     {
         _repositories = repositories;
-    }
-
-    public IActionResult Index()
-    {
-        return View();
     }
 }
