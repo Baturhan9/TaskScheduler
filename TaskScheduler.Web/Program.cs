@@ -1,6 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Configuration.Sources.Clear();
+builder.Configuration.AddJsonFile("appsettings.json");
+
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseSqlite(connectionString,b => b.MigrationsAssembly("TaskScheduler.Web"))
+);
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
