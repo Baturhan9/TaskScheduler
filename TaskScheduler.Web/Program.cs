@@ -1,5 +1,7 @@
+using Contracts.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Models;
+using Services.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlite(connectionString,b => b.MigrationsAssembly("TaskScheduler.Web"))
 );
+
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 builder.Services.AddControllersWithViews();
 
