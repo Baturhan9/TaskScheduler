@@ -9,15 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{E8A7B19A-0F4C-4057-92B4-47688607CB7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskScheduler.Web", "TaskScheduler.Web\TaskScheduler.Web.csproj", "{EB440D92-90F4-41CC-A51C-83BF48062D9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTechScheduler.Web", "TaskScheduler.Web\TaskTechScheduler.Web.csproj", "{EB440D92-90F4-41CC-A51C-83BF48062D9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8FC5457A-5A6E-4DC1-86E0-1E4AAA3D9512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +33,8 @@ Global
 		{EB440D92-90F4-41CC-A51C-83BF48062D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB440D92-90F4-41CC-A51C-83BF48062D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB440D92-90F4-41CC-A51C-83BF48062D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

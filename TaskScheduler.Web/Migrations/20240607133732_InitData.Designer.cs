@@ -8,7 +8,7 @@ using Models;
 
 #nullable disable
 
-namespace TaskScheduler.Web.Migrations
+namespace TaskTechScheduler.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20240607133732_InitData")]

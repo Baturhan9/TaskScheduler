@@ -1,4 +1,4 @@
-namespace TaskScheduler.Web.Models;
+namespace TaskTechScheduler.Web.ViewModels;
 
 public class ErrorViewModel
 {

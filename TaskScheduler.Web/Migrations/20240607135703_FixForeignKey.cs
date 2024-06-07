@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace TaskScheduler.Web.Migrations
+namespace TaskTechScheduler.Web.Migrations
 {
     /// <inheritdoc />
     public partial class FixForeignKey : Migration
