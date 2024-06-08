@@ -44,7 +44,9 @@ public class TasksRepository : ITasksRepository
     public void UpdateTask(int id, Tasks task)
     {
         var taskObj = _context.Tasks.Where(t => t.Id == id).SingleOrDefault();
-        taskObj = task;
+        taskObj.Title = task.Title;
+        taskObj.Description = task.Description;
+        taskObj.isCompleted = task.isCompleted;
         _context.Entry(taskObj).State = EntityState.Modified;
         _context.SaveChanges();
     }

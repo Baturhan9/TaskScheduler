@@ -41,4 +41,25 @@ public class MainAdminController : Controller
         _repositories.Tasks.CreateTask(taskObj);
         return RedirectToAction("ListTasks");
     }
+
+    public IActionResult ShowTask(int id)
+    {
+        var taskObj = _repositories.Tasks.GetTaskById(id);
+        var taskViewModel = _mapper.Map<SingleTaskViewModel>(taskObj);
+        return View(taskViewModel);
+    }
+
+    [HttpPost]
+    public IActionResult UpdateTask(int id, SingleTaskViewModel task)
+    {
+        var taskObj = _mapper.Map<Tasks>(task);
+        _repositories.Tasks.UpdateTask(id, taskObj);
+        return RedirectToAction("ListTasks");
+    }
+
+    public IActionResult DeleteTask(int id)
+    {
+        _repositories.Tasks.DeleteTask(id);
+        return RedirectToAction("ListTasks");
+    }
 }

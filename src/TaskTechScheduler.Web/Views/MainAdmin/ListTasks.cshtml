@@ -13,6 +13,7 @@
             <th>ID</th>
             <th>Название</th>
             <th>Статус</th>
+            <th>Действия</th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,7 @@
                             break;
                     }
                 </td>
+                <td><a asp-action="ShowTask" class="btn btn-secondary"asp-route-id=@task.TaskId>Редактировать</a></td>
             </tr>
         }
     </tbody>

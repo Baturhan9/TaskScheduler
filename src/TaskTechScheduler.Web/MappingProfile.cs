@@ -22,6 +22,7 @@ public class MappingProfile : Profile
             ));
 
         CreateMap<CreateTaskViewModel, Tasks>();
+        CreateMap<Tasks, SingleTaskViewModel>().ReverseMap();
     }
     
 }

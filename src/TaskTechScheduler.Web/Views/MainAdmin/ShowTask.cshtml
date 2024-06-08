@@ -1,0 +1,24 @@
+@model TaskTechScheduler.Web.ViewModels.MainAdminViewModel.SingleTaskViewModel;
+
+<div class="container">
+    <h1>Задача: @Model.Title</h1>
+    <form asp-action="UpdateNote" method="post">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" placeholder="Введите заголовок">
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" placeholder="Введите описание"></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="isCompleted"></label>
+            <input asp-for="isCompleted" type="checkbox">
+        </div>
+        <br />
+        <div>
+            <button style="float:left" type="submit" class="btn btn-primary" asp-action="UpdateTask" asp-route-id=@Model.Id>Обновить</button>
+            <button style="float:left"class="btn btn-danger mr" asp-action="DeleteTask" asp-route-id="@Model.Id">Удалить</button>
+        </div>
+    </form>
+</div>
