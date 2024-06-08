@@ -1,6 +1,12 @@
 @using TaskTechScheduler.Web.ViewModels.MainAdminViewModel
 @model IEnumerable<TaskTechScheduler.Web.ViewModels.MainAdminViewModel.ListOfTasks>
 
+<div>
+<a asp-action="CreateTask" class="btn btn-primary btn-lg">
+  <i class="fas fa-plus"></i> Создать
+</a>
+</div>
+
 <table class="table table-striped">
     <thead>
         <tr>

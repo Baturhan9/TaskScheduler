@@ -20,6 +20,8 @@ public class MappingProfile : Profile
                     ? ListOfTasks.StatusTask.Doing
                     : ListOfTasks.StatusTask.Issued
             ));
+
+        CreateMap<CreateTaskViewModel, Tasks>();
     }
     
 }
