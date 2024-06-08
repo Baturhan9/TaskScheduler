@@ -46,7 +46,14 @@ public class MainAdminController : Controller
     {
         var taskObj = _repositories.Tasks.GetTaskById(id);
         var taskViewModel = _mapper.Map<SingleTaskViewModel>(taskObj);
-        return View(taskViewModel);
+        string adminName = "----";
+        if(taskObj.AcceptedUserAdminId is not null)
+        {
+            var admin =  _repositories.Users.GetAdminById((int)taskObj.AcceptedUserAdminId);
+            adminName = admin.FirstName + " " + admin.LastName;
+        }
+        var taskToShow = new ShowTaskViewModel{Task = taskViewModel, FullNameUserAdmins = adminName};
+        return View(taskToShow);
     }
 
     [HttpPost]
