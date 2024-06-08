@@ -1,4 +1,6 @@
+using Contracts;
 using Contracts.Repositories;
+using Services;
 using Services.Repositories;
 using TaskTechScheduler.Web.Extensions;
 
@@ -8,6 +10,7 @@ builder.Configuration.Sources.Clear();
 builder.Configuration.AddJsonFile("appsettings.json");
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddScoped<IReportMaker, ReportMaker>();
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();

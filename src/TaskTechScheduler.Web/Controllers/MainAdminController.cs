@@ -1,4 +1,5 @@
 using AutoMapper;
+using Contracts;
 using Contracts.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -10,11 +11,13 @@ public class MainAdminController : Controller
 {
     private readonly IRepositoryManager _repositories;
     private readonly IMapper _mapper;
+    private readonly IReportMaker _reportMaker;
 
-    public MainAdminController(IRepositoryManager repositories, IMapper mapper)
+    public MainAdminController(IRepositoryManager repositories, IMapper mapper, IReportMaker reportMaker)
     {
         _repositories = repositories;
         _mapper = mapper;
+        _reportMaker = reportMaker;
     }
 
     public IActionResult Index()
@@ -68,5 +71,16 @@ public class MainAdminController : Controller
     {
         _repositories.Tasks.DeleteTask(id);
         return RedirectToAction("ListTasks");
+    }
+
+    public FileResult DownloadReport()
+    {
+        string currentUserName = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Split('\\').Last();
+        var tasks = _repositories.Tasks.GetAllTasks();
+        string fileName = "reportTasks.docx";
+        string filePath = @$"C:\Users\{currentUserName}\Documents\{fileName}";
+        _reportMaker.MakeReports(tasks, filePath);
+        byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+        return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
     }
 }
