@@ -18,7 +18,11 @@ public class TechAdminController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var id = Request.Cookies["UserAdminId"];
+        var admin = _repositories.Users.GetAdminById(int.Parse(id));
+        string name = admin.FirstName + " " + admin.LastName;
+        return View(model:name);
+
     }
     public IActionResult ListTasks()
     {
