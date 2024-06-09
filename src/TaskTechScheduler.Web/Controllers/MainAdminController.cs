@@ -2,6 +2,7 @@ using AutoMapper;
 using Contracts;
 using Contracts.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Models;
 using TaskTechScheduler.Web.ViewModels.MainAdminViewModel;
 using TaskTechScheduler.Web.ViewModels.Shared;
@@ -26,10 +27,27 @@ public class MainAdminController : Controller
         return View();
     }
     
-    public IActionResult ListTasks()
+    public IActionResult ListTasks(string sortOption = "")
     {
         var tasks = _repositories.Tasks.GetAllTasks();
-        var tasksViewModel = _mapper.Map<List<ListOfTasks>>(tasks);
+        
+        var listOfTasksViewModel = _mapper.Map<List<ListOfTasks>>(tasks);
+        if(sortOption != "")
+        {
+            switch(sortOption)
+            {
+                case "Issued":
+                    listOfTasksViewModel = listOfTasksViewModel.Where(t => t.Status == ListOfTasks.StatusTask.Issued).ToList();
+                    break;
+                case "Doing":
+                    listOfTasksViewModel = listOfTasksViewModel.Where(t => t.Status == ListOfTasks.StatusTask.Doing).ToList();
+                    break;
+                case "Done":
+                    listOfTasksViewModel = listOfTasksViewModel.Where(t => t.Status == ListOfTasks.StatusTask.Done).ToList();
+                    break;
+            }
+        }
+        var tasksViewModel = new ListOfTasksWithSortOption{Tasks = listOfTasksViewModel, SortOption= sortOption};
         return View(tasksViewModel);
     }
 
