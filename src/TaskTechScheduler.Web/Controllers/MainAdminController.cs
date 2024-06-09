@@ -70,6 +70,8 @@ public class MainAdminController : Controller
     public IActionResult ShowTask(int id)
     {
         var taskObj = _repositories.Tasks.GetTaskById(id);
+        if(taskObj is null)
+            return NotFound();
         var taskViewModel = _mapper.Map<SingleTaskViewModel>(taskObj);
         string adminName = "----";
         if(taskObj.AcceptedUserAdminId is not null)

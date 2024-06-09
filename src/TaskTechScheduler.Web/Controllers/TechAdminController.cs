@@ -47,6 +47,8 @@ public class TechAdminController : Controller
     public IActionResult ShowTask(int id)
     {
         var taskObj = _repositories.Tasks.GetTaskById(id);
+        if(taskObj is null)
+            return NotFound();
         var taskViewModel = _mapper.Map<SingleTaskViewModel>(taskObj);
         string adminName = "----";
         bool isFree = true;
