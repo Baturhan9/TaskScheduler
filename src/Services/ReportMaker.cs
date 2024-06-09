@@ -30,10 +30,10 @@ public class ReportMaker : IReportMaker
             {
                 
                 string admin = "----";
-                string completedDate = task.CompletedDate.ToString() ?? "not complete";
+                string completedDate = task.CompletedDate?.ToString() ?? "not complete";
                 if (task.TechAdmin is not null)
                     admin = task.TechAdmin.FirstName + " " + task.TechAdmin.LastName;
-                sb.Append($"\nЗадача №{task.Id}:\nВыполнил/Выполняет: {admin}\nДата завершения: {completedDate}\n");
+                sb.Append($"\nЗадача №{task.Id} {task.Title}:\nВыполнил/Выполняет: {admin}\nДата завершения: {completedDate}\n");
 
             }
             string[] replacementTexts = new[]{
