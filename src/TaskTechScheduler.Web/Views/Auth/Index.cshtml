@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 class="text-center">Registration Form</h2>
+            <h2 class="text-center">Авторизация</h2>
             <form method="post">
                 <div class="form-group">
                     <label>Login</label>
@@ -13,8 +13,19 @@
                     <label >Password</label>
                     <input asp-for="Password" class="form-control" type="password" placeholder="Enter password"/>
                 </div>
+                <br/>
+                <div>
+                <label class="error">@ViewBag.AuthError</label>
+                </div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
         </div>
     </div>
 </div>
+
+<style>
+    .error
+    {
+        color:red
+    }
+</style>
