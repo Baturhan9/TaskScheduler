@@ -13,6 +13,14 @@ public class TasksRepository : ITasksRepository
         _context = context;
     }
 
+    public void AcceptTask(int id, int userAdminId)
+    {
+        var task = _context.Tasks.Where(t => t.Id == id).SingleOrDefault();
+        task.AcceptedUserAdminId = userAdminId;
+        _context.Entry(task).State = EntityState.Modified;
+        _context.SaveChanges();
+    }
+
     public void CreateTask(Tasks task)
     {
         _context.Tasks.Add(task);
@@ -23,6 +31,15 @@ public class TasksRepository : ITasksRepository
     {
         var task = _context.Tasks.Where(t => t.Id == id).SingleOrDefault();
         _context.Tasks.Remove(task);
+        _context.SaveChanges();
+    }
+
+    public void DoneTask(int id)
+    {
+        var taskObj = _context.Tasks.Where(t => t.Id == id).SingleOrDefault();
+        taskObj.isCompleted = true;
+        taskObj.CompletedDate = DateTime.Now;
+        _context.Entry(taskObj).State = EntityState.Modified;
         _context.SaveChanges();
     }
 

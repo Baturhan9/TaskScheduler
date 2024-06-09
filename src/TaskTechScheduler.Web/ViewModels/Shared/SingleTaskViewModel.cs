@@ -1,4 +1,4 @@
-namespace TaskTechScheduler.Web.ViewModels.MainAdminViewModel;
+namespace TaskTechScheduler.Web.ViewModels.Shared;
 
 public class SingleTaskViewModel
 {

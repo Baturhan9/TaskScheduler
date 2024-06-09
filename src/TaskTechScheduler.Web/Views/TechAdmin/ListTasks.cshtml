@@ -2,19 +2,13 @@
 @using TaskTechScheduler.Web.ViewModels.Shared
 @model IEnumerable<TaskTechScheduler.Web.ViewModels.Shared.ListOfTasks>
 
-<div>
-<a asp-action="CreateTask" class="btn btn-primary btn-lg">
-  <i class="fas fa-plus"></i> Создать
-</a>
-</div>
-
 <table class="table table-striped">
     <thead>
         <tr>
             <th>ID</th>
             <th>Название</th>
             <th>Статус</th>
-            <th>Действия</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -37,7 +31,7 @@
                             break;
                     }
                 </td>
-                <td><a asp-action="ShowTask" class="btn btn-secondary"asp-route-id=@task.TaskId>Редактировать</a></td>
+                <td><a asp-action="ShowTask" class="btn btn-secondary"asp-route-id=@task.TaskId>Подробнее</a></td>
             </tr>
         }
     </tbody>

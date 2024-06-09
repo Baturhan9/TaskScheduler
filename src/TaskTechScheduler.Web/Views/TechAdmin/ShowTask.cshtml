@@ -2,7 +2,6 @@
 
 <div class="container">
     <h1>Задача: @Model.Task.Title</h1>
-    <form method="post">
         <div class="form-group">
             <label>Заголовок</label>
             <input asp-for="Task.Title" class="form-control" placeholder="Введите заголовок">
@@ -14,15 +13,20 @@
         <div class="form-group">
             <label >Кто Выполняет</label>
             <input asp-for="Task.Description" class="form-control" readonly value=@Model.FullNameUserAdmins>
-        </div>
-        <div class="form-group">
-            <label >Выполнено</label>
-            <input asp-for="Task.isCompleted" type="checkbox">
-        </div>
         <br />
         <div>
-            <button style="float:left" type="submit" class="btn btn-primary" asp-action="UpdateTask" asp-route-id=@Model.Task.Id>Обновить</button>
-            <button style="float:left"class="btn btn-danger mr" asp-action="DeleteTask" asp-route-id="@Model.Task.Id">Удалить</button>
+            @if(Model.Task.isCompleted)
+            {
+                <a class="btn btn-secondary" asp-action="ListTasks">Назад</a>
+            }
+            else if(Model.IsFree)
+            {
+
+                <a style="float:left"class="btn btn-primary" asp-action="AcceptTask" asp-route-id=@Model.Task.Id>Взять задачу</a>
+            }
+            else if (Model.IsMine)
+            {
+                <a style="float:left"class="btn btn-danger mr" asp-action="DoneTask" asp-route-id="@Model.Task.Id">Завершить</a>
+            }
         </div>
-    </form>
 </div>

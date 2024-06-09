@@ -1,6 +1,7 @@
 using AutoMapper;
 using Models;
 using TaskTechScheduler.Web.ViewModels.MainAdminViewModel;
+using TaskTechScheduler.Web.ViewModels.Shared;
 
 namespace TaskTechScheduler.Web;
 

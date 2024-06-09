@@ -10,4 +10,7 @@ public interface ITasksRepository
     void CreateTask(Tasks task);
     void UpdateTask(int id, Tasks task);
     void DeleteTask(int id);
+
+    void AcceptTask(int id, int userAdminId);
+    void DoneTask(int id);
 }

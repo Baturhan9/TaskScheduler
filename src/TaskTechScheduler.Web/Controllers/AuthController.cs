@@ -25,6 +25,7 @@ public class AuthController : Controller
         var admin = _repositories.Users.GetAdminByLoginAndPassword(user.Login, user.Password);
         if(admin is null)
             return View();
+        Response.Cookies.Append("UserAdminId", admin.Id.ToString());
         if(admin.Role == Models.UserAdmins.UserRole.MainAdmin)
             return RedirectToAction("Index", "MainAdmin");
         else 
