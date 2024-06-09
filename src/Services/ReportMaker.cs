@@ -28,11 +28,13 @@ public class ReportMaker : IReportMaker
             StringBuilder sb = new StringBuilder();
             foreach (var task in tasks)
             {
+                
                 string admin = "----";
-                string completedDate = task.CompletedDate.ToString() ?? "----";
+                string completedDate = task.CompletedDate.ToString() ?? "not complete";
                 if (task.TechAdmin is not null)
                     admin = task.TechAdmin.FirstName + " " + task.TechAdmin.LastName;
-                sb.Append($"Задача №{task.Id}:\n\tВыполнил/Выполняет: {admin}\n\tДата завершения: {completedDate}\n\n");
+                sb.Append($"\nЗадача №{task.Id}:\nВыполнил/Выполняет: {admin}\nДата завершения: {completedDate}\n");
+
             }
             string[] replacementTexts = new[]{
                 tasks.Count().ToString(),
@@ -71,8 +73,16 @@ public class ReportMaker : IReportMaker
 
             // Get the Run that holds the Text element for our merge field
             // Get the Text element and replace the text content 
-            Text t = rText.GetFirstChild<Text>();
-            t.Text = replacementText;
+            var lines = replacementText.Split('\n');
+            foreach(var line in lines)
+            {
+                Text textLine = new Text(line);
+                rText.Append(textLine);
+                rText.Append(new Break());
+                Text t = rText.GetFirstChild<Text>();
+                t.Text = "";
+            }
+            
 
             // Remove all the four (4) Runs for our merge field
             rFldCode.Remove();
