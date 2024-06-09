@@ -13,6 +13,6 @@ public class Tasks
 
 
     [ForeignKey(nameof(AcceptedUserAdminId))]
-    public UserAdmins TechAdmin {get;set;}
+    public virtual UserAdmins TechAdmin {get;set;}
 
 }

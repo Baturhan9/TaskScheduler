@@ -3,6 +3,10 @@
 @model TaskTechScheduler.Web.ViewModels.MainAdminViewModel.ListOfTasksWithSortOption
 
 <div>
+<a style="float:left"asp-action="Index" class="btn btn-secondary btn-lg">
+  <i class="fas fa-plus"></i> Назад
+</a>
+
 <a style="float:left"asp-action="CreateTask" class="btn btn-primary btn-lg">
   <i class="fas fa-plus"></i> Создать
 </a>
@@ -22,6 +26,7 @@
             <th>ID</th>
             <th>Название</th>
             <th>Статус</th>
+            <th>Дата выполнения</th>
             <th>Действия</th>
         </tr>
     </thead>
@@ -45,6 +50,7 @@
                             break;
                     }
                 </td>
+                <td>@task.CompletedDate</td>
                 <td><a asp-action="ShowTask" class="btn btn-secondary"asp-route-id=@task.TaskId>Редактировать</a></td>
             </tr>
         }

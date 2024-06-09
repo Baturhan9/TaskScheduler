@@ -1,5 +1,6 @@
 using System.Text;
 using Contracts;
+using Contracts.Repositories;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -9,6 +10,13 @@ namespace Services;
 
 public class ReportMaker : IReportMaker
 {
+    private readonly IRepositoryManager _repos;
+
+    public ReportMaker(IRepositoryManager repos)
+    {
+        _repos = repos;
+    }
+
     public void MakeReports(List<Models.Tasks> tasks, string pathToSave)
     {
         CreateFile(pathToSave);
@@ -31,8 +39,11 @@ public class ReportMaker : IReportMaker
                 
                 string admin = "----";
                 string completedDate = task.CompletedDate?.ToString() ?? "not complete";
-                if (task.TechAdmin is not null)
-                    admin = task.TechAdmin.FirstName + " " + task.TechAdmin.LastName;
+                if (task.AcceptedUserAdminId is not null)
+                {
+                    var adminObject = _repos.Users.GetAdminById((int)task.AcceptedUserAdminId);
+                    admin = adminObject.FirstName + " " + adminObject.LastName;
+                }
                 sb.Append($"\nЗадача №{task.Id} {task.Title}:\nВыполнил/Выполняет: {admin}\nДата завершения: {completedDate}\n");
 
             }

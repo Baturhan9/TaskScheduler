@@ -24,9 +24,23 @@ public class TechAdminController : Controller
         return View(model:name);
 
     }
-    public IActionResult ListTasks()
+    public IActionResult ListTasks(string sortOption = "")
     {
         var tasks = _repositories.Tasks.GetAllTasks();
+        if(sortOption != "")
+        {
+            switch(sortOption)
+            {
+                case "FreeTasks":
+                    tasks=tasks.Where(t => t.AcceptedUserAdminId is null).ToList();
+                    break;
+                case "MineTasks":
+                    string id = Request.Cookies["UserAdminId"]!;
+                    tasks = tasks.Where(t => t.AcceptedUserAdminId.ToString() == id).ToList();
+                    break;
+            }
+        }
+
         var tasksViewModel = _mapper.Map<List<ListOfTasks>>(tasks);
         return View(tasksViewModel);
     }

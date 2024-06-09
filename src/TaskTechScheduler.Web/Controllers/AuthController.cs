@@ -16,6 +16,8 @@ public class AuthController : Controller
 
     public IActionResult Index()
     {
+        if(Request.Cookies.ContainsKey("UserAdminId"))
+            Response.Cookies.Delete("UserAdminId");
         return View();
     }
 

@@ -17,7 +17,7 @@
         <div>
             @if(Model.Task.isCompleted)
             {
-                <a class="btn btn-secondary" asp-action="ListTasks">Назад</a>
+                //nothing
             }
             else if(Model.IsFree)
             {
@@ -26,7 +26,9 @@
             }
             else if (Model.IsMine)
             {
-                <a style="float:left"class="btn btn-danger mr" asp-action="DoneTask" asp-route-id="@Model.Task.Id">Завершить</a>
+                <a style="float:left"class="btn btn-success" asp-action="DoneTask" asp-route-id="@Model.Task.Id">Завершить</a>
             }
+            
+                <a style="float:left"class="btn btn-secondary" asp-action="ListTasks">Назад</a>
         </div>
 </div>

@@ -2,12 +2,23 @@
 @using TaskTechScheduler.Web.ViewModels.Shared
 @model IEnumerable<TaskTechScheduler.Web.ViewModels.Shared.ListOfTasks>
 
+<a style="float:left"asp-action="Index" class="btn btn-secondary btn-lg">
+  <i class="fas fa-plus"></i> Назад
+</a> 
+
+ <select style="float:left; margin:10px;" id="sortOption" onchange="sortData()">
+    <option>Сортировка</option>
+    <option value="FreeTasks">Свободные задачи</option>
+    <option value="MineTasks" >Мои задачи</option>
+    <option value="">Все</option>
+</select>
 <table class="table table-striped">
     <thead>
         <tr>
             <th>ID</th>
             <th>Название</th>
             <th>Статус</th>
+            <td>Дата выполнения</td>
             <th></th>
         </tr>
     </thead>
@@ -31,8 +42,16 @@
                             break;
                     }
                 </td>
+                <td>@task.CompletedDate</td>
                 <td><a asp-action="ShowTask" class="btn btn-secondary"asp-route-id=@task.TaskId>Подробнее</a></td>
             </tr>
         }
     </tbody>
 </table>
+
+<script>
+    function sortData() {
+        var sortOption = document.getElementById("sortOption").value;
+        window.location.href ="@Url.Action("ListTasks", "TechAdmin")" + "?sortOption=" + sortOption; 
+    }
+</script>
