@@ -10,7 +10,7 @@ public class Tasks
     public int? AcceptedUserAdminId {get;set;}
     public bool isCompleted {get;set;}
     public DateTime? CompletedDate {get;set;}
-
+    public string? ResultDescription {get;set;}
 
     [ForeignKey(nameof(AcceptedUserAdminId))]
     public virtual UserAdmins TechAdmin {get;set;}

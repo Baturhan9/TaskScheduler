@@ -14,13 +14,17 @@
             <label >Кто Выполняет</label>
             <input asp-for="Task.Description" class="form-control" readonly value=@Model.FullNameUserAdmins>
         <div>
+        
         @if(Model.Task.isCompleted)
         {
-        <div class="form-group">
-            <label> Дата выполнения</label>
-            <input readonly value="@Model.Task.CompletedDate"/>
-
-        </div>
+            <div class="form-group">
+                <label> Дата выполнения</label>
+                <input class="form-control"readonly value="@Model.Task.CompletedDate"/>
+            </div>
+            <div class="form-group">
+                <label> Что было сделано</label>
+                <input class="form-control"readonly value="@Model.Task.ResultDescription"/>
+            </div>
         }
 
         <br />
@@ -36,7 +40,16 @@
             }
             else if (Model.IsMine)
             {
-                <a style="float:left"class="btn btn-success" asp-action="DoneTask" asp-route-id="@Model.Task.Id">Завершить</a>
+                <form method="post"  asp-action="DoneTask">
+                    
+                    <div class="form-group">
+                        <label> Что было сделано</label>
+                        <input name="description" class="form-control"type="text">
+                    </div>
+                    <input name="id" value="@Model.Task.Id" hidden type="number"/>
+                    <br/>
+                    <button style="float:left" type="submit" class="btn btn-success">Завершить</button>
+                </form>
             }
             
                 <a style="float:left"class="btn btn-secondary" asp-action="ListTasks">Назад</a>

@@ -71,9 +71,9 @@ public class TechAdminController : Controller
         _repositories.Tasks.AcceptTask(id, int.Parse(userAdminId!));
         return RedirectToAction("ListTasks");
     }
-    public IActionResult DoneTask(int id)
+    public IActionResult DoneTask(string description, int id)
     {
-        _repositories.Tasks.DoneTask(id);
+        _repositories.Tasks.DoneTask(id, description);
         return RedirectToAction("ListTasks");
     }
 

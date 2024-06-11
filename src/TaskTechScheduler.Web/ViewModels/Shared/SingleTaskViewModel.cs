@@ -7,5 +7,6 @@ public class SingleTaskViewModel
     public required string Description {get;set;}
     public bool isCompleted {get;set;}
     public DateTime? CompletedDate {get;set;}
+    public string? ResultDescription {get;set;}
     
 }

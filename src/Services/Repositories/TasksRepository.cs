@@ -34,10 +34,11 @@ public class TasksRepository : ITasksRepository
         _context.SaveChanges();
     }
 
-    public void DoneTask(int id)
+    public void DoneTask(int id, string description)
     {
         var taskObj = _context.Tasks.Where(t => t.Id == id).SingleOrDefault();
         taskObj.isCompleted = true;
+        taskObj.ResultDescription = description;
         taskObj.CompletedDate = DateTime.Now;
         _context.Entry(taskObj).State = EntityState.Modified;
         _context.SaveChanges();

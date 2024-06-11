@@ -12,5 +12,5 @@ public interface ITasksRepository
     void DeleteTask(int id);
 
     void AcceptTask(int id, int userAdminId);
-    void DoneTask(int id);
+    void DoneTask(int id, string description);
 }
